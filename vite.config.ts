@@ -9,8 +9,15 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve('/src'),
+      '@': resolve('/src/'),
       '#': resolve('/types')
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        // 这里可以配置 Less 的选项
+      }
     }
   }
 });
