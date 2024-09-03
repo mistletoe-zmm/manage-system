@@ -4,9 +4,9 @@
     "paths": {
       // 用于设置模块名到基于baseUrl的路径映射
       "@/*": ["src/*"],
-      "#/*": ["types/*"]
     },
-    "types": ["element-plus/global"],
-    "moduleResolution": "Node"
+    "exclude": ["node_modules", "dist"] // 排除不需要处理的文件夹
+//    "types": ["element-plus/global"]
+//    "moduleResolution": "Node"
   }
 }

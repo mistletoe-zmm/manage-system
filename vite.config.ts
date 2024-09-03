@@ -1,16 +1,15 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { join } from 'path';
-function resolve(dir: string): string {
-  return join(__dirname, dir); //可以用process.cwd() path.join()和path.resolve()
+import {resolve} from 'path';
+function _resolve(dir: string): string {
+  return resolve(__dirname, dir); //可以用process.cwd() path.join()和path.resolve()
 }
 
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve('/src/'),
-      '#': resolve('/types')
+      '@': _resolve('src'),
     }
   },
   css: {

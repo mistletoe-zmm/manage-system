@@ -1,10 +1,28 @@
 import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 
 import layouts from '@/layouts/index.vue';
+import login from '@/views/login/index.vue';
+import HomeIndex from '@/views/home/index.vue';
 
-import { test } from '@/api/system';
+import { getMenu } from '@/api/system';
 
-const routes: Array<RouteRecordRaw> = [{ path: '/', component: layouts }];
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    component: layouts,
+    children: [
+      {
+        path: '/index',
+        component: HomeIndex
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: login
+  }
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -16,10 +34,11 @@ const router = createRouter({
 // }]
 
 const handleMenu = async () => {
-  test().then(res => {
-    console.log('res', res);
-    localStorage.setItem('menu', JSON.stringify(res.data));
-  });
+  const userStore = useUserStore();
+  if (userStore.menuList?.length) {
+    return;
+  }
+  userStore.getUserMenus();
 };
 
 const isAuthenticated = true;
